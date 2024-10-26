@@ -8,7 +8,6 @@ import '../Styles/Header.css';
 import logo from './images/image.png';
 import { FaBars } from 'react-icons/fa';
 import axios from './axiosInstance';
-import { AuthContext } from '../context/AuthContext'; 
 
 function Header() {
   const [menuToggle, setMenuToggle] = useState(false);
