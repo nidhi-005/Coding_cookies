@@ -49,23 +49,7 @@ function Header() {
     setMenuToggle(false);
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const filteredResults = books.filter(book =>
-      book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      book.department.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      book.genre.toLowerCase().includes(searchQuery.toLowerCase())
-    );
 
-    navigate('/search-results', { state: { searchResults: filteredResults } });
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      handleSearch(e);
-    }
-  };
 
   const handleLogout = () => {
     googleLogout();
@@ -80,35 +64,16 @@ function Header() {
           <a href="https://iitdh.ac.in"><img src={logo} alt='iitdh logo' /></a>
         </div>
         <Link to="/" onClick={closeMenu}>
-          <h1>LIBRARY</h1>
+          <h1>Indoor Sports Occupancy Tracker</h1>
         </Link>
       </div>
       <div className='nav-right'>
-        <div className='search' onSubmit={handleSearch}>
-          <input
-            className='search-input'
-            type='text'
-            placeholder={isMobile ? 'Search' : 'Search by Title / Author / Department / Genre'}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-          <button type="button" onClick={handleSearch}><FaSearch id='search-icon' /></button>
-        </div>
+        
         <div className="mobile-menu" onClick={() => setMenuToggle(!menuToggle)}>
           <FaBars className="menu-icon" />
         </div>
         <ul className={menuToggle ? "nav-options active" : "nav-options"}>
-          <li className="option" onClick={() => { closeMenu() }}>
-            <Link to='/my-books'>
-              My Books
-            </Link>
-          </li>
-          <li className="option" onClick={() => { closeMenu() }}>
-            <Link to='/my-history'>
-              My History
-            </Link>
-          </li>
+          
           <li className="option" onClick={() => { closeMenu() }}>
             {isAuthenticated ? (
               <>
@@ -116,7 +81,7 @@ function Header() {
                 <button className="logout-button" onClick={handleLogout}>Logout</button>
               </>
             ) : (
-              <GoogleLogin
+              <GoogleLogin className="google-login"
                 onSuccess={async (credentialResponse) => {
                   const decoded = jwtDecode(credentialResponse.credential);
                   setUser(decoded);
