@@ -1,11 +1,21 @@
 .options-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    height: 100vh;
-    background-color: #f3f3f3;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* height: 100vh; */
+  height: auto;
+  background-color: #f3f3f3;
+  box-sizing: border-box;
+}
+
+.heading {
+  font-size: 28px;
+  justify-content: center;
+  text-align: center;
+  color: black;
+  margin-top: 100px;
+}
   
   .facility-block {
     width: 200px;

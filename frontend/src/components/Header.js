@@ -50,7 +50,7 @@ function Header() {
     }
 
     // Navigate to second page after successful login
-    navigate('/facilities');
+    navigate('/options');
   };
 
 

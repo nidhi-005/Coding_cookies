@@ -12,8 +12,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/facilities" element={<facilities />} />
         <Route path="/options" element={<OptionPage />} />
+        <Route path="/facilities" element={<facilities />} />
+        
 
         {/* <Route path="/student-login" element={
           <Modal>
