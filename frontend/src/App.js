@@ -20,6 +20,7 @@ function App() {
             <StudentSignup />
           </Modal>
         } /> */}
+        <Route path="/options" element={<OptionsPage />} />
       </Routes>
     </BrowserRouter>
   );

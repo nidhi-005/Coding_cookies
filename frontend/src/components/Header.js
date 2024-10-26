@@ -8,6 +8,7 @@ import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode"; // Correct import statement
 import { AuthContext } from '../context/AuthContext'; // Correct import path for AuthContext
 
+
 function Header() {
   const [menuToggle, setMenuToggle] = useState(false);
   const [books, setBooks] = useState([]);
@@ -18,19 +19,7 @@ function Header() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const res = await axios.get('/books');
-        setBooks(res.data);
-        setFilteredBooks(res.data);
-      } catch (error) {
-        console.error('Error fetching books', error);
-      }
-    };
 
-    fetchBooks();
-  }, []);
 
   useEffect(() => {
     const handleResize = () => {
