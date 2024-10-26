@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import facilities from './components/facilities';
+import FacilityPage from './components/FacilityPage';
 import Home from './components/Home';
 import Header from './components/Header';
-import OptionPage from './components/OptionsPage';  // Ensure path and naming are correct
+import OptionPage from './components/OptionPage';  // Ensure path and naming are correct
  // Import MyHistory component
 
 function App() {
@@ -12,8 +12,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/facilities" element={<facilities />} />
-        <Route path="/options" element={<OptionPage />} />
+        <Route path="/options" element={<OptionPage/>} />
+        <Route path="/facilities" element={<FacilityPage/>} />
+       
 
         {/* <Route path="/student-login" element={
           <Modal>

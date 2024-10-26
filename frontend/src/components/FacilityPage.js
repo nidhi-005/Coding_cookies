@@ -1,17 +1,16 @@
-// src/pages/FacilityPage.js
 import React, { useEffect, useState, useContext } from 'react';
 import axios from './axiosInstance';
 import '../Styles/facilities.css';
-import { AuthContext } from '../context/AuthContext'; 
+import { AuthContext } from '../context/AuthContext';
 
 function FacilityPage() {
   const [facilities, setFacilities] = useState([]);
-  const { user } = useContext(AuthContext); // Access user info
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchOccupancyData = async () => {
       try {
-        const res = await axios.get('/occupancy'); // Endpoint to get occupancy status
+        const res = await axios.get('/facilities'); // Correct API call
         setFacilities(res.data);
       } catch (error) {
         console.error('Error fetching occupancy data:', error);
@@ -22,14 +21,14 @@ function FacilityPage() {
 
   return (
     <div className="facility-container">
-      <h2>Welcome, {user.given_name}</h2>
+      <h2>Welcome, {user?.given_name || 'Guest'}</h2>
       <p>Check the current occupancy of our indoor sports facilities.</p>
       <div className="facility-grid">
         {facilities.map((facility) => (
           <div key={facility.name} className="facility-card">
             <h3>{facility.name}</h3>
-            <p>Status: {facility.status}</p>
-            <p>Current Occupancy: {facility.occupancy}</p>
+            <p>Status: {facility.currentOccupancy < facility.totalCapacity ? 'Open' : 'Full'}</p>
+            <p>Current Occupancy: {facility.currentOccupancy}</p>
           </div>
         ))}
       </div>
@@ -38,3 +37,4 @@ function FacilityPage() {
 }
 
 export default FacilityPage;
+
