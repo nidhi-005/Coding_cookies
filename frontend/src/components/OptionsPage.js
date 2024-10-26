@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Styles/OptionsPage.css'; // Custom CSS for the square blocks
+import '../Styles/OptionsPage.css'; // Custom CSS for the square blocks
 
 function OptionsPage() {
   const [occupancyData, setOccupancyData] = useState({
@@ -25,6 +25,8 @@ function OptionsPage() {
 
   return (
     <div className="options-container">
+        <h2>Facility Occupancy Status</h2>
+
       {Object.entries(occupancyData).map(([facility, data]) => (
         <div key={facility} className="facility-block">
           <h3>{facility.charAt(0).toUpperCase() + facility.slice(1)}</h3>

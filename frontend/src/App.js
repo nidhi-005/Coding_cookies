@@ -1,8 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
+import facilities from './components/facilities';
 import Home from './components/Home';
-import Header from './components/Header'; // Import MyHistory component
+import Header from './components/Header';
+import OptionPage from './components/OptionsPage';  // Ensure path and naming are correct
+ // Import MyHistory component
 
 function App() {
   return (
@@ -10,6 +12,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/facilities" element={<facilities />} />
+        <Route path="/options" element={<OptionPage />} />
+
         {/* <Route path="/student-login" element={
           <Modal>
             <StudentLogin />
@@ -20,7 +25,7 @@ function App() {
             <StudentSignup />
           </Modal>
         } /> */}
-        <Route path="/options" element={<OptionsPage />} />
+        
       </Routes>
     </BrowserRouter>
   );

@@ -11,11 +11,8 @@ import { AuthContext } from '../context/AuthContext'; // Correct import path for
 
 function Header() {
   const [menuToggle, setMenuToggle] = useState(false);
-  const [books, setBooks] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
   const { isAuthenticated, setIsAuthenticated, user, setUser } = useContext(AuthContext); // Use AuthContext
   const navigate = useNavigate();
-  const [filteredBooks, setFilteredBooks] = useState([]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
 
@@ -38,12 +35,30 @@ function Header() {
     setMenuToggle(false);
   };
 
+  const handleLoginSuccess = async (credentialResponse) => {
+    const decoded = jwtDecode(credentialResponse.credential);
+    setUser(decoded);
+    setIsAuthenticated(true);
+
+    try {
+      await axios.post('/users/register', {
+        name: decoded.name,
+        email: decoded.email,
+      });
+    } catch (error) {
+      console.error('Error registering user:', error);
+    }
+
+    // Navigate to second page after successful login
+    navigate('/facilities');
+  };
 
 
   const handleLogout = () => {
     googleLogout();
     setIsAuthenticated(false);
     setUser(null);
+    navigate('/');
   };
 
   return (
@@ -71,21 +86,22 @@ function Header() {
               </>
             ) : (
               <GoogleLogin className="google-login"
-                onSuccess={async (credentialResponse) => {
-                  const decoded = jwtDecode(credentialResponse.credential);
-                  setUser(decoded);
-                  setIsAuthenticated(true);
+              onSuccess={handleLoginSuccess}
+                // onSuccess={async (credentialResponse) => {
+                //   const decoded = jwtDecode(credentialResponse.credential);
+                //   setUser(decoded);
+                //   setIsAuthenticated(true);
 
-                  // Register or find the user in the backend
-                  try {
-                    await axios.post('/users/register', {
-                      name: decoded.name,
-                      email: decoded.email,
-                    });
-                  } catch (error) {
-                    console.error('Error registering user:', error);
-                  }
-                }}
+                //   // Register or find the user in the backend
+                //   try {
+                //     await axios.post('/users/register', {
+                //       name: decoded.name,
+                //       email: decoded.email,
+                //     });
+                //   } catch (error) {
+                //     console.error('Error registering user:', error);
+                //   }
+                // }}
                 onError={() => {
                   console.log('Login Failed');
                 }}
