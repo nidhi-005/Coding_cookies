@@ -1,79 +1,57 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
-
-hr {
-  height: 2px;
-  width: 100%;
-  color: white;
-  margin-bottom: 0px;
-}
+/* About.css */
 
 .about-box {
-  background-color: rgb(91, 14, 114);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background-color: lavender; /* Change to blue */
+  padding: 20px; /* Padding around the content */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 100%; /* Full width of the container */
+  max-width: none; /* Remove maximum width constraint */
+  margin: 0 auto; /* Center the box horizontally */
 }
 
 .about-title {
-  color: #ffad4a;
-  text-align: center;
-  font-size: 32px;
-  padding: 25px;
-  margin-bottom: 20px;
-  margin-top: 0px;
-}
-
-.about-img img {
-  width: 100%;
-  max-width: 700px;
-  border-radius: 25px;
-  padding: 5px;
-  height: 500px;
-  object-fit: cover;
+  text-align: center; /* Center the title */
+  color: #0a45f7; /* Change text color to white for contrast */
+  margin-bottom: 20px; /* Space below the title */
 }
 
 .about-data {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  text-align: center;
+  display: flex; /* Flexbox for layout */
+  flex-direction: row; /* Horizontal layout */
+  align-items: stretch; /* Stretch to fill container height */
+  justify-content: center; /* Center align the feature containers */
+  flex-wrap: wrap; /* Allow wrapping for responsive design */
 }
 
-ul {
-  margin-inline-start: inherit;
-  color: rgb(220, 225, 219);
+.about-feature {
+  flex: 1; /* Flex-grow to take available space */
+  background-color: #fff; /* White background for features */
+  padding: 20px; /* Padding for feature boxes */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin: 10px; /* Space around feature boxes */
+  min-width: 250px; /* Minimum width for feature boxes */
+  display: flex; /* Enable flexbox for heading and paragraph */
+  flex-direction: column; /* Column layout */
+  text-align: center; /* Center text within feature boxes */
+}
+.about-feature h3 {
+  margin: 0; /* Remove margin for heading */
+  font-size: 1.25rem; /* Font size for heading */
+  white-space: nowrap; /* Prevent heading from wrapping to a new line */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis if text overflows */
 }
 
-.about-data p {
-  font-size: 15px;
-  font-family: 'Poppins', sans-serif;
-  text-align: justify;
-  padding: 15px;
-  color: rgb(220, 225, 219);
-  margin: 0;
+.about-feature p {
+  margin: 10px 0 0 0; /* Margin for paragraph */
+  flex-grow: 1; /* Allow paragraph to grow and fill space */
 }
 
-@media screen and (max-width: 768px) {
-  .about-data {
-    grid-template-columns: 1fr;
-  }
-  .about-data p {
-    font-size: 30px;
-    margin-left: 16px;
-    margin-right: 16px;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .about-data {
-    grid-template-columns: 1fr 1fr; /* Adjust grid columns for desktop view */
-    align-items: center; /* Center align the content vertically */
-  }
-  .about-data p {
-    font-size: 15px;
-    margin-left: 50px;
-    margin-right: 50px;
-  }
+.contact-details {
+  text-align: center; /* Center contact details */
+  margin-top: 20px; /* Space above contact details */
+  font-size: 1rem; /* Font size for contact details */
+  color: #0a45f7; /* Change text color to white for contrast */
 }

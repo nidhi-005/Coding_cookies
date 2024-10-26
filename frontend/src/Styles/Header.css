@@ -7,7 +7,7 @@
   width: 100%;
   position: fixed;
   z-index: 100;
-  background-color: #cf8122;
+  background-color: lavender;
   box-shadow: 0 1px 4px rgba(146, 161, 176, 0.15);
   top: 0;
   padding: 0 20px;
@@ -26,9 +26,10 @@
 
 .logo-nav-new h1 {
   font-size: 28px;
-  color: #faf0fd;
+  color: #0a45f7; /* Change the color to a shade of blue (adjust as needed) */
   margin: 0;
   white-space: nowrap;
+  text-decoration: none; /* Remove underline */
 }
 
 .nav-right {

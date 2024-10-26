@@ -1,19 +1,108 @@
 .home-background {
-    background-image: url('https://pbs.twimg.com/media/Fg4PgHnVEAAPXvH.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh; /* Ensure it takes full viewport height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 2rem; /* Space for content after header */
-    color: white;
-    text-align: center;
+    background-color:#A7C6ED; /* Light blue background color */
+    padding: 20px; /* Padding for the main section */
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    min-height: 80vh; /* Minimum height for the viewport */
+}
+.explore-section {
+    margin-top: 100px; /* Space below the header */
+    background-color: lavender; /* Light gray background */
+    padding: 20px; /* Add padding for inner spacing */
+    border-radius: 8px; /* Optional rounded corners */
+    text-align: center; /* Center the text */
+}
+
+.explore-section h5 {
+    font-size: 24px; /* Font size for the heading */
+    color:black; /* Dark color for visibility */
+    font-weight: bold; /* Make the heading bold */
+    margin-bottom: 10px; /* Space below the heading */
+}
+
+.explore-section p {
+    font-size: 18px; /* Font size for the paragraph */
+    color: black; /* Light gray for the paragraph */
+    line-height: 1.5; /* Line height */
+    max-width: 600px; /* Max width for paragraph */
+    margin: 0 auto; /* Center paragraph */
 }
 
 .content {
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
-    padding: 2rem;
-    border-radius: 8px;
+    text-align: center; /* Center the content */
+}
+
+h5 {
+    margin-top: 20px; /* Space above the heading */
+}
+
+/* Gallery Section */
+.gallery {
+    display: flex; /* Use flexbox for the gallery layout */
+    justify-content: center; /* Center the flip card */
+    align-items: center; /* Center items vertically */
+    height: 64.5vh; /* Full viewport height */
+    margin: 0; /* Remove margin to avoid excess spacing */
+}
+
+/* Flip Card */
+.flip-card {
+    background-color: transparent;
+    width: 1000px; /* Increased width for flip card */
+    height: 400px; /* Increased height for flip card */
+    perspective: 1000px; /* Perspective for 3D effect */
+    margin: 10px; /* Space around cards */
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.08s; /* Shortened transition duration */
+    transform-style: preserve-3d; /* Preserve 3D effect */
+}
+
+/* Hover effect for flipping */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg); /* Rotate the card when hovered */
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hide back side when facing front */
+    border-radius: 8px; /* Rounded corners */
+}
+
+.flip-card-front {
+    display: flex; /* Use flexbox for image positioning */
+    align-items: center; /* Center image vertically */
+    justify-content: center; /* Center image horizontally */
+}
+
+.flip-card-back {
+    display: flex; /* Use flexbox for back content positioning */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    backface-visibility: hidden; /* Hide back side when facing front */
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* Ensure images fill the card and maintain aspect ratio */
+.flip-card img {
+    width: 100%; /* Set image width to fill the card */
+    height: 100%; /* Set image height to fill the card */
+    object-fit: cover; /* Cover the area, maintaining aspect ratio */
+}
+
+/* Optional: Adjust the card for better visibility on smaller screens */
+@media (max-width: 768px) {
+    .flip-card {
+        width: 250px; /* Decrease width for smaller screens */
+        height: 150px; /* Decrease height for smaller screens */
+    }
 }
