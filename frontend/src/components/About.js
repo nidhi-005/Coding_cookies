@@ -5,28 +5,22 @@ function About() {
     return (
         <div className='about-box'>
             {/* <hr style={{color:'white',height:'2px'}}/> */}
-            <h2 className="about-title">About the Library</h2>
+            <h2 className="about-title">About Our Website</h2>
             <div className="about-data">
                 <div className="about-img">
-                    <img src="https://images.unsplash.com/photo-1537202108838-e7072bad1927?q=80&w=1946&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                    <img src="https://img.jagranjosh.com/images/2022/April/1242022/Gym%20PIc.jpg" alt="" />
                 </div>
                 <div>
-                    <p className="about-text">
-                        <p>Welcome to our Library Managemnet System (LMS)!</p>
-                        <p>Our LMS offers a range of features to make your library experience more convenient and enjoyable. With our system, you can : )</p>
-                        <br/>
-                        <ul>
-                            <li>View your borrowed books and their due dates through the "My Books" option.</li>
-                            <li>Search for books in our catalog using our adavanced search function.</li>
-                            <li>Reserve books in advance to ensure availability.</li>
-                            <li>By clicking on any Book in the Search Results, you can access that book's details.</li>
-                            <li>Click on the IIT Dharwad icon to visit our official website and explore more resources.
-                            </li>
-                        </ul>
-                        <p>Our Goal is to provide a user-friendly and efficient platform for all your library needs. We value your feedback and suggestions, so please don't hesitate to reach out to us for any improvements or ideas you may have.</p>
-                        <p>Thankyou for being a part of the IIT Dharwad Library community!</p>
-                    </p>
-                </div>
+          <p>Welcome to our Sports Complex Occupancy Tracker!</p>
+          <p>This tool offers real-time updates on the availability of gym facilities and courts, making your experience more convenient.</p>
+          <ul>
+            <li>View real-time occupancy status for different facilities.</li>
+            <li>Plan your workouts and games based on facility availability.</li>
+            <li>Explore our community's additional resources on our main website.</li>
+          </ul>
+          <p>We are here to ensure you make the most of your time. Suggestions for improvement are always welcome!</p>
+          <p>Thank you for being part of our community!</p>
+        </div>
             </div>
         </div>
     );

@@ -43,6 +43,7 @@ hr {
 
 ul {
   margin-inline-start: inherit;
+  color: rgb(220, 225, 219);
 }
 
 .about-data p {
@@ -59,7 +60,7 @@ ul {
     grid-template-columns: 1fr;
   }
   .about-data p {
-    font-size: 16px;
+    font-size: 30px;
     margin-left: 16px;
     margin-right: 16px;
   }
