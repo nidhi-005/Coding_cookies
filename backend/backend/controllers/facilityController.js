@@ -1,38 +1,60 @@
 // controllers/facilityController.js
 import Facility from '../models/Facility.js';
+import User from '../models/User.js';
 
-// Get occupancy status for all facilities
-export const getAllFacilities = async (req, res) => {
+// Check-in functionality for Admin
+export const checkIn = async (req, res) => {
+  const { name, rollNo, sport } = req.body;
+
   try {
-    const facilities = await Facility.find();
-    res.json(facilities);
+    const facility = await Facility.findOne({ name: sport });
+    if (!facility) {
+      return res.status(404).json({ message: 'Facility not found' });
+    }
+
+    if (facility.currentOccupancy >= facility.maxOccupancy) {
+      return res.status(400).json({ message: 'Facility is full' });
+    }
+
+    // Add the user to the facility's occupancy
+    facility.currentOccupancy += 1;
+    await facility.save();
+
+    // Add a check-in record for the user
+    const user = await User.findOneAndUpdate(
+      { email: req.user.email },
+      { $push: { checkedInFacilities: { name, rollNo, sport, checkedIn: true } } },
+      { new: true }
+    );
+
+    res.status(200).json({ message: 'Check-in successful', user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 };
 
-// Update occupancy for a specific facility
-export const updateOccupancy = async (req, res) => {
-  const { facilityName, increment } = req.body;
+// Check-out functionality for Admin
+export const checkOut = async (req, res) => {
+  const { userId, sport } = req.body;
 
   try {
-    const facility = await Facility.findOne({ name: facilityName });
-
+    const facility = await Facility.findOne({ name: sport });
     if (!facility) {
       return res.status(404).json({ message: 'Facility not found' });
     }
 
-    const newOccupancy = facility.currentOccupancy + (increment ? 1 : -1);
-
-    if (newOccupancy < 0 || newOccupancy > facility.maxOccupancy) {
-      return res.status(400).json({ message: 'Occupancy limit exceeded' });
-    }
-
-    facility.currentOccupancy = newOccupancy;
+    facility.currentOccupancy -= 1;
     await facility.save();
 
-    res.status(200).json({ message: 'Occupancy updated successfully', facility });
+    // Remove check-in record for the user
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { checkedInFacilities: { sport, checkedIn: true } } },
+      { new: true }
+    );
+
+    res.status(200).json({ message: 'Check-out successful', user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
