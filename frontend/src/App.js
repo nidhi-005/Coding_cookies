@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Home from './components/Home';
 import Header from './components/Header'; // Import MyHistory component
+import OptionsPage from './components/OptionsPage';
 
 function App() {
   return (

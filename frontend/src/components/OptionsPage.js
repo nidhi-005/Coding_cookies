@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Styles/OptionsPage.css'; // Custom CSS for the square blocks
+ // Custom CSS for the square blocks
+import '../Styles/OptionsPage.css';
 
 function OptionsPage() {
   const [occupancyData, setOccupancyData] = useState({
