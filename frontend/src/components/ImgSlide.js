@@ -21,7 +21,7 @@ function ImgSlide() {
           <img src={image1} className="d-block w-100" alt="Library Collection"/>
           <div className="carousel-caption">
             <h5>Explore Our Indoor Complex</h5>
-            <p>Discover a vast indoor facilities.</p>
+            <p>Discover a wide variety of indoor sport facilities.</p>
           </div>
         </div>
         
