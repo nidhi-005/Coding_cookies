@@ -1,9 +1,11 @@
+// src/App.js
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
 import Home from './components/Home';
-import Header from './components/Header'; // Import MyHistory component
-import OptionsPage from './components/OptionsPage';
+import OptionPage from './components/OptionPage';
+import AdminPage from './components/AdminPage';
+import FacilityPage from './components/FacilityPage';
 
 function App() {
   return (
@@ -11,20 +13,13 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/student-login" element={
-          <Modal>
-            <StudentLogin />
-          </Modal>
-        } />
-        <Route path="/student-signup" element={
-          <Modal>
-            <StudentSignup />
-          </Modal>
-        } /> */}
-        <Route path="/options" element={<OptionsPage />} />
+        <Route path="/options" element={<OptionPage />} />
+        <Route path="/facilities" element={<FacilityPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
+
