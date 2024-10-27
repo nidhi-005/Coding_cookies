@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://lms-sitesculptors-backend.onrender.com/api', // Replace with your actual backend URL
-  timeout: 5000,
-  headers: { 'Content-Type': 'application/json' }
+  baseURL: 'http://localhost:5000/api',
 });
 
 export default instance;
