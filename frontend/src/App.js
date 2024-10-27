@@ -5,8 +5,6 @@ import Header from './components/Header';
 import Home from './components/Home';
 import OptionPage from './components/OptionPage';
 import AdminPage from './components/AdminPage';
-import FacilityPage from './components/FacilityPage';
-
 function App() {
   return (
     <BrowserRouter>
@@ -14,7 +12,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/options" element={<OptionPage />} />
-        <Route path="/facilities" element={<FacilityPage />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
