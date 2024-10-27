@@ -12,6 +12,17 @@
   top: 0;
   padding: 0 20px;
 }
+.header-title {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit color */
+}
+
+.header-title h1 {
+  font-size: 28px;
+  color: #0a45f7;
+  margin: 0;
+  white-space: nowrap;
+}
 
 .logo-nav-new {
   display: flex;
@@ -24,12 +35,13 @@
   margin-right: 15px;
 }
 
+/* Remove underline from header title */
 .logo-nav-new h1 {
   font-size: 28px;
   color: #0a45f7;
   margin: 0;
   white-space: nowrap;
-  text-decoration: none;
+  text-decoration: none; /* Ensure there's no underline */
 }
 
 .nav-right {
@@ -40,7 +52,7 @@
 
 .login-buttons {
   display: flex; /* Ensure buttons are in line */
-  gap: 10px; /* Space between buttons */
+  gap: 50px; /* Space between buttons */
 }
 
 .student-button,
@@ -101,23 +113,23 @@
   }
 
   /* Mobile Menu */
-.nav-options {
-  display: none; /* Hide by default */
-  position: fixed;
-  top: 80px; /* Position below the header */
-  right: 0;
-  width: 250px;
-  background-color: #6c1b85ff;
-  flex-direction: column;
-  align-items: stretch; /* Stretch items to fit */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margin */
-  z-index: 200; /* Ensure it stays on top */
-}
+  .nav-options {
+    display: none; /* Hide by default */
+    position: fixed;
+    top: 80px; /* Position below the header */
+    right: 0;
+    width: 250px;
+    background-color: #6c1b85ff;
+    flex-direction: column;
+    align-items: stretch; /* Stretch items to fit */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    z-index: 200; /* Ensure it stays on top */
+  }
 
-.nav-options.active {
-  display: flex; /* Show when active */
-}
+  .nav-options.active {
+    display: flex; /* Show when active */
+  }
 
   .nav-options .option {
     padding: 10px 15px; /* Adjust padding for dropdown items */

@@ -64,8 +64,9 @@ function Header() {
           </a>
         </div>
         <Link to="/" onClick={closeMenu} className="header-title">
-          <h1>Indoor Sports Occupancy Tracker</h1>
+               <h1>Indoor Sports Occupancy Tracker</h1>
         </Link>
+
       </div>
 
       {!isAuthenticated && (
