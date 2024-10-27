@@ -1,9 +1,9 @@
-html, body {
+ html, body {
   height: 100%; /* Full height */
   width: 100%; /* Full width */
   margin: 0; /* Remove default margin */
-  overflow: hidden; /* Prevent scrolling */
-}
+  
+} 
 
 .options-container {
     display: flex;
