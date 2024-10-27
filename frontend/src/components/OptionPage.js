@@ -8,6 +8,7 @@ function OptionsPage() {
     tableTennis: { count: 0, status: 'Loading...', image: "./images/tt.jpeg" },
     squash: { count: 0, status: 'Loading...', image: "./images/" },
     gym: { count: 0, status: 'Loading...' },
+    Foosball: { count: 0, status: 'Loading...' },
   });
 
   useEffect(() => {

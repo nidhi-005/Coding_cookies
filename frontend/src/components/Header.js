@@ -1,25 +1,22 @@
-// src/components/Header.js
 import React, { useState, useEffect, useContext } from 'react';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import { AuthContext } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode'; // Correct import (without brackets)
+import { jwtDecode } from 'jwt-decode';
 import '../Styles/Header.css';
 import logo from './images/image.png';
 import { FaBars } from 'react-icons/fa';
-import axios from './axiosInstance';
 
 function Header() {
   const [menuToggle, setMenuToggle] = useState(false);
   const { isAuthenticated, setIsAuthenticated, user, setUser } = useContext(AuthContext);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [loginRole, setLoginRole] = useState(null); // Store login role
-  const [showPopup, setShowPopup] = useState(false); // Control popup visibility
+  const [loginRole, setLoginRole] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 740);
+      // You can add logic here if you want to handle responsive menu differently
     };
 
     window.addEventListener('resize', handleResize);
@@ -33,17 +30,16 @@ function Header() {
   };
 
   const handleLoginClick = (role) => {
-    setLoginRole(role); // Set the role (student/admin)
-    setShowPopup(true); // Show Google OAuth popup
+    setLoginRole(role);
+    setShowPopup(true);
   };
 
   const handleLoginSuccess = async (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse.credential);
     setUser(decoded);
     setIsAuthenticated(true);
-    setShowPopup(false); // Close the popup after success
+    setShowPopup(false);
 
-    // Navigate based on the login role
     if (loginRole === 'student') {
       navigate('/options');
     } else {
@@ -68,14 +64,17 @@ function Header() {
           </a>
         </div>
         <Link to="/" onClick={closeMenu} className="header-title">
-          <h1>Indoor Sports Occupancy Tracker</h1>
+               <h1>Indoor Sports Occupancy Tracker</h1>
         </Link>
+
       </div>
 
-      <div className="login-buttons">
-        <button onClick={() => handleLoginClick('student')}>Student Login</button>
-        <button onClick={() => handleLoginClick('admin')}>Admin Login</button>
-      </div>
+      {!isAuthenticated && (
+        <div className="login-buttons">
+          <button onClick={() => handleLoginClick('student')} className="student-button">Student Login</button>
+          <button onClick={() => handleLoginClick('admin')} className="admin-button">Admin Login</button>
+        </div>
+      )}
 
       <div className='nav-right'>
         <div className="mobile-menu" onClick={() => setMenuToggle(!menuToggle)}>
@@ -88,14 +87,11 @@ function Header() {
                 <span className="hi-username">Hi, {user.given_name}</span>
                 <button className="logout-button" onClick={handleLogout}>Logout</button>
               </>
-            ) : (
-              <></> // Login handled by separate buttons above
-            )}
+            ) : null}
           </li>
         </ul>
       </div>
 
-      {/* Conditionally Render Google Login Popup */}
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup">
@@ -103,7 +99,7 @@ function Header() {
             <GoogleLogin
               onSuccess={handleLoginSuccess}
               onError={() => console.log('Login Failed')}
-              useOneTap={false} // Disable one-tap to force popup
+              useOneTap={false}
             />
           </div>
         </div>

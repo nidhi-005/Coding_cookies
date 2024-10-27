@@ -1,17 +1,25 @@
+ html, body {
+  height: 100%; /* Full height */
+  width: 100%; /* Full width */
+  margin: 0; /* Remove default margin */
+  
+} 
+
 .options-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     height: 75vh;
-    background-color: #f3f3f3;
+    background-color: lavenderblush;
   }
 
   .heading {
         font-size: 28px;
         margin-top: 100px;
         text-align: center;
-        background-color: #f3f3f3;
+        background-color: #add8e6;
+        color:black;
   }
   
   .facility-block {
