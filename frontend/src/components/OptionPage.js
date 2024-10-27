@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../Styles/OptionsPage.css'; // Custom CSS for the square blocks
 
+import badmintonImage from './images/badminton-court.jpg';
+import tableTennisImage from './images/tt.jpg';
+import squashImage from './images/squash.jpg';
+import gymImage from './images/Gym.jpg';
+import foosballImage from './images/foosball.jpg';
+
+
 function OptionsPage() {
   const [occupancyData, setOccupancyData] = useState({
-    badminton: { count: 0, status: 'Loading...' },
-    tableTennis: { count: 0, status: 'Loading...' },
-    squash: { count: 0, status: 'Loading...' },
-    gym: { count: 0, status: 'Loading...' },
-    Foosball: { count: 0, status: 'Loading...' },
+    badminton: { count: 0, status: 'Loading...', image: badmintonImage},
+    tableTennis: { count: 0, status: 'Loading...', image: tableTennisImage },
+    squash: { count: 0, status: 'Loading...', image: squashImage },
+    gym: { count: 0, status: 'Loading...', image: gymImage },
+    Foosball: { count: 0, status: 'Loading...', image: foosballImage },
   });
 
   useEffect(() => {
@@ -30,6 +37,7 @@ function OptionsPage() {
         <div className='options-container'>
         {Object.entries(occupancyData).map(([facility, data]) => (
         <div key={facility} className="facility-block">
+          <img src={data.image} alt={`${facility} icon`} className="facility-image" />
           <h3>{facility.charAt(0).toUpperCase() + facility.slice(1)}</h3>
           <p>Occupancy: {data.count}</p>
           <p>Status: {data.status}</p>

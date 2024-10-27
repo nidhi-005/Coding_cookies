@@ -1,5 +1,5 @@
  html, body {
-  height: 100%; /* Full height */
+   height: 60vh;/* Full height */
   width: 100%; /* Full width */
   margin: 0; /* Remove default margin */
   
@@ -23,8 +23,8 @@
   }
   
   .facility-block {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 300px;
     margin: 20px;
     background-color: #6c1b85;
     color: white;
@@ -49,5 +49,12 @@
   p {
     margin: 5px 0;
     font-size: 18px;
+  }
+
+  .facility-image {
+    width: 80%;
+    height: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
   }
   
