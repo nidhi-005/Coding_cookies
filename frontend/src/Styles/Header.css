@@ -26,10 +26,10 @@
 
 .logo-nav-new h1 {
   font-size: 28px;
-  color: #0a45f7; /* Change the color to a shade of blue (adjust as needed) */
+  color: #0a45f7;
   margin: 0;
   white-space: nowrap;
-  text-decoration: none; /* Remove underline */
+  text-decoration: none;
 }
 
 .nav-right {
@@ -38,42 +38,36 @@
   gap: 20px;
 }
 
-.search {
-  display: flex;
-  align-items: center;
-  width: 60%;
+.login-buttons {
+  display: flex; /* Ensure buttons are in line */
+  gap: 10px; /* Space between buttons */
 }
 
-.search-input {
-  flex-grow: 1;
-  width: 100%;
-  height: 70%;
-  margin: 10px 0;
-  padding: 0.5rem;
-  font-size: 18px;
-  border-radius: 10px;
-  border: 1px solid #4f1262;
-  color: #111;
-}
-
-.search button[type="button"] {
-  width: 50px;
-  height: 40px;
-  background-color: #6c1b85ff;
-  color: #fff;
+.student-button,
+.admin-button {
+  background-color: #6c1b85; /* Adjust background color as needed */
+  color: white;
+  padding: 10px 15px;
   border: none;
-  font-size: 18px;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: 0 10px 10px 0;
 }
 
-/* Nav Options and Google Auth */
+.student-button:hover,
+.admin-button:hover {
+  background-color: #5b0f70; /* Darker shade on hover */
+}
+
 .nav-options {
   display: flex;
   align-items: center;
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+.option {
+  padding: 15px 0;
 }
 
 .hi-username {
@@ -92,68 +86,45 @@
   cursor: pointer;
 }
 
+/* Mobile Menu */
 .mobile-menu {
   display: none;
 }
 
 /* Responsive Styles */
 @media (max-width: 1190px) {
-  .header {
-    padding: 0 10px;
-  }
-
-  .logo img {
-    height: 40px;
-  }
-
-  .logo-nav-new h1 {
-    font-size: 22px;
-  }
-
-  .nav-right {
-    gap: 10px;
-  }
-
-  .search {
-    width: 100%;
-  }
-
-  .search-input {
-    width: 80%;
-  }
-
-  .search button[type="button"] {
-    width: 20%;
-  }
-
-  .nav-options {
-    display: none;
-    position: fixed;
-    top: 80px;
-    right: 0;
-    width: 250px;
-    background-color: #6c1b85ff;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    z-index: 100;
-  }
-
-  .nav-options.active {
-    display: flex;
-    transform: translateX(0);
-  }
-
-  .option {
-    padding: 15px 0;
-  }
-
   .mobile-menu {
     display: block;
     color: #fff;
     font-size: 25px;
     cursor: pointer;
+  }
+
+  /* Mobile Menu */
+.nav-options {
+  display: none; /* Hide by default */
+  position: fixed;
+  top: 80px; /* Position below the header */
+  right: 0;
+  width: 250px;
+  background-color: #6c1b85ff;
+  flex-direction: column;
+  align-items: stretch; /* Stretch items to fit */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  z-index: 200; /* Ensure it stays on top */
+}
+
+.nav-options.active {
+  display: flex; /* Show when active */
+}
+
+  .nav-options .option {
+    padding: 10px 15px; /* Adjust padding for dropdown items */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Optional bottom border for separation */
+  }
+
+  .nav-options .option:last-child {
+    border-bottom: none; /* Remove border from last item */
   }
 }
