@@ -1,10 +1,56 @@
-// controllers/facilityController.js
 import Facility from '../models/Facility.js';
-import User from '../models/User.js';
 
-// Check-in functionality for Admin
+// Fetch all facilities
+export const getAllFacilities = async (req, res) => {
+  try {
+    const facilities = await Facility.find();
+    res.status(200).json(facilities);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const getOccupancy = async (req, res) => {
+  try {
+    const facilities = await Facility.find().select('name currentOccupancy maxOccupancy');
+    const occupancyData = facilities.reduce((acc, facility) => {
+      acc[facility.name.toLowerCase()] = {
+        count: facility.currentOccupancy,
+        maxOccupancy: facility.maxOccupancy
+      };
+      return acc;
+    }, {});
+
+    res.status(200).json(occupancyData);
+  } catch (error) {
+    console.error('Error fetching occupancy data:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Update occupancy of a specific facility
+export const updateOccupancy = async (req, res) => {
+  const { sport, occupancy } = req.body;
+
+  try {
+    const facility = await Facility.findOne({ name: sport });
+    if (!facility) {
+      return res.status(404).json({ message: 'Facility not found' });
+    }
+
+    facility.currentOccupancy = occupancy;
+    await facility.save();
+    res.status(200).json({ message: 'Occupancy updated successfully', facility });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Check-in functionality
 export const checkIn = async (req, res) => {
-  const { name, rollNo, sport } = req.body;
+  const { name, rollNumber, sport } = req.body;
 
   try {
     const facility = await Facility.findOne({ name: sport });
@@ -16,45 +62,54 @@ export const checkIn = async (req, res) => {
       return res.status(400).json({ message: 'Facility is full' });
     }
 
-    // Add the user to the facility's occupancy
     facility.currentOccupancy += 1;
+    facility.checkedInStudents.push({ name, rollNo: rollNumber });
+
     await facility.save();
-
-    // Add a check-in record for the user
-    const user = await User.findOneAndUpdate(
-      { email: req.user.email },
-      { $push: { checkedInFacilities: { name, rollNo, sport, checkedIn: true } } },
-      { new: true }
-    );
-
-    res.status(200).json({ message: 'Check-in successful', user });
+    res.status(200).json({ message: 'Check-in successful', facility });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 };
 
-// Check-out functionality for Admin
+// Check-out functionality
 export const checkOut = async (req, res) => {
-  const { userId, sport } = req.body;
+  const { studentId, sport } = req.params;
 
   try {
-    const facility = await Facility.findOne({ name: sport });
-    if (!facility) {
-      return res.status(404).json({ message: 'Facility not found' });
-    }
+    
+      const facility = await Facility.findOne({ name: sport });
+      if (!facility) {
+        return res.status(404).json({ message: 'Facility not found' });
+      }
+  
+      // Find the student in the checkedInStudents array
+      const studentIndex = facility.checkedInStudents.findIndex(
+        (student) => student._id.toString() === studentId
+      );
+  
+      if (studentIndex === -1) {
+        return res.status(404).json({ message: 'Student not found' });
+      }
+  
+      // Update current occupancy and remove the student
+      facility.currentOccupancy -= 1;
+      facility.checkedInStudents.splice(studentIndex, 1); // Remove the student from the array
 
-    facility.currentOccupancy -= 1;
     await facility.save();
+    res.status(200).json({ message: 'Check-out successful', facility });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
-    // Remove check-in record for the user
-    const user = await User.findByIdAndUpdate(
-      userId,
-      { $pull: { checkedInFacilities: { sport, checkedIn: true } } },
-      { new: true }
-    );
-
-    res.status(200).json({ message: 'Check-out successful', user });
+// Get check-ins for all facilities
+export const getCheckIns = async (req, res) => {
+  try {
+    const facilities = await Facility.find().select('name checkedInStudents');
+    res.status(200).json(facilities);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });

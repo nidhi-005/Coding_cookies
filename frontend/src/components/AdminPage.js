@@ -1,6 +1,7 @@
+// AdminPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Slider from 'react-slick'; // Import Slider from react-slick
+import Slider from 'react-slick';
 import '../Styles/AdminCheckInOut.css';
 
 function AdminPage() {
@@ -9,41 +10,57 @@ function AdminPage() {
   const [sport, setSport] = useState('Badminton');
   const [students, setStudents] = useState([]);
 
-  // Fetch students who have checked in
   useEffect(() => {
     fetchStudents();
   }, []);
 
   const fetchStudents = async () => {
+    
     try {
-      const response = await axios.get('http://localhost:5000/api/checkins');
-      setStudents(response.data);
+
+      const response = await axios.get('http://localhost:5000/api/facilities/checkins');
+      const checkInData = response.data
+        .flatMap((facility) =>
+          facility.checkedInStudents.map((student) => ({
+            ...student,
+            sport: facility.name,
+          }))
+        );
+      setStudents(checkInData);
     } catch (error) {
       console.error('Error fetching students:', error);
     }
   };
 
   const handleCheckIn = async () => {
+    if (!name || !rollNumber || !sport) {
+      alert("Please fill in all details before checking in.");
+      return;
+    }
     try {
-      await axios.post('http://localhost:5000/api/checkin', { name, rollNumber, sport });
+      await axios.post('http://localhost:5000/api/facilities/checkin', {
+        name,
+        rollNumber,
+        sport,
+      });
+      alert("Successfully checked in.");
       setName('');
       setRollNumber('');
-      fetchStudents(); // Refresh student list
+      fetchStudents();
     } catch (error) {
       console.error('Error checking in:', error);
     }
   };
 
-  const handleCheckOut = async (studentId) => {
+  const handleCheckOut = async (studentId, sport) => {
     try {
-      await axios.post(`http://localhost:5000/api/checkout/${studentId}`);
-      fetchStudents(); // Refresh student list
+      await axios.post(`http://localhost:5000/api/facilities/checkout/${studentId}/${sport}`);
+      fetchStudents();
     } catch (error) {
       console.error('Error checking out:', error);
     }
   };
 
-  // Slider settings
   const settings = {
     dots: true,
     infinite: true,
@@ -84,16 +101,17 @@ function AdminPage() {
                 id="sport"
                 value={sport}
                 onChange={(e) => setSport(e.target.value)}
-              > 
-                {/* <option value="select">--select--</option> */}
+              >
                 <option value="Badminton">Badminton</option>
                 <option value="TableTennis">Table Tennis</option>
                 <option value="Squash">Squash</option>
                 <option value="Gym">Gym</option>
-                <option value="FoosBall">Foos Ball</option> 
+                <option value="FoosBall">Foos Ball</option>
               </select>
             </div>
-            <button className="submit-button" onClick={handleCheckIn}>Check In</button>
+            <button className="submit-button" onClick={handleCheckIn}>
+              Check In
+            </button>
           </div>
 
           <div className="section check-out-section">
@@ -101,8 +119,15 @@ function AdminPage() {
             <div className="student-list">
               {students.map((student) => (
                 <div key={student._id} className="student-item">
-                  <p>{student.name} ({student.rollNumber}) - {student.sport}</p>
-                  <button className="checkout-button" onClick={() => handleCheckOut(student._id)}>Check Out</button>
+                  <p>
+                    {student.name} ({student.rollNo}) - {student.sport}
+                  </p>
+                  <button
+                    className="checkout-button"
+                    onClick={() => handleCheckOut(student._id, student.sport)}
+                  >
+                    Check Out
+                  </button>
                 </div>
               ))}
             </div>
@@ -114,3 +139,4 @@ function AdminPage() {
 }
 
 export default AdminPage;
+

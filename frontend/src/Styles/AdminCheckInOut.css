@@ -65,7 +65,7 @@ select {
 
 .submit-button,
 .checkout-button {
-  width: 100%; /* Full width for buttons */
+  width: 30%; /* Full width for buttons */
   padding: 10px; /* Padding inside buttons */
   border: none; /* No border */
   border-radius: 5px; /* Rounded corners */
