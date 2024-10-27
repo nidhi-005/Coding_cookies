@@ -37,6 +37,20 @@ function AdminPage() {
       alert("Please fill in all details before checking in.");
       return;
     }
+    const existingCheckIn = students.find(
+      (student) => student.rollNo === rollNumber
+    );
+  
+    if (existingCheckIn) {
+      if (existingCheckIn.sport === sport) {
+        alert("You are already checked into this court. Please check out first.");
+      } else {
+        alert(
+          `You are already checked into ${existingCheckIn.sport}. Please check out before checking into a new court.`
+        );
+      }
+      return;
+    }
     try {
       await axios.post('http://localhost:5000/api/facilities/checkin', {
         name,
