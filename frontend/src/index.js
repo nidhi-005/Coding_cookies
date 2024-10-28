@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './context/AuthContext';
 import { GoogleOAuthProvider } from '@react-oauth/google'; // Import GoogleOAuthProvider
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const clientId = 'YOUR_GOOGLE_CLIENT_ID'; // Replace with your actual client ID
 
