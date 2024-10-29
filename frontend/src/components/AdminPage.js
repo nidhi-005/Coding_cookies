@@ -69,6 +69,7 @@ function AdminPage() {
   const handleCheckOut = async (studentId, sport) => {
     try {
       await axios.post(`http://localhost:5000/api/facilities/checkout/${studentId}/${sport}`);
+      alert("Checking out done.");
       fetchStudents();
     } catch (error) {
       console.error('Error checking out:', error);
