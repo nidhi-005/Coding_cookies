@@ -68,11 +68,20 @@ function AdminPage() {
 
   const handleCheckOut = async (studentId, sport) => {
     try {
-      await axios.post(`http://localhost:5000/api/facilities/checkout/${studentId}/${sport}`);
-      alert("Checking out done.");
-      fetchStudents();
+      const response = await axios.post(
+        `http://localhost:5000/api/facilities/checkout/${studentId}/${sport}`
+      );
+  
+      // Assuming the API returns a success message or status
+      if (response.status === 200) {
+        alert("Successfully checked out.");
+        fetchStudents(); // Refresh the student list after checkout
+      } else {
+        alert("Failed to check out. Please try again.");
+      }
     } catch (error) {
       console.error('Error checking out:', error);
+      alert("Error occurred during checkout. Please try again.");
     }
   };
 
