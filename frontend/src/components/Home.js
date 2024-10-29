@@ -8,8 +8,8 @@ import '../Styles/HomeBG.css';
 
 function Home() {
   const images = [
-    { src: Gym, alt: 'Gym' },
     { src: Squash, alt: 'Squash' },
+    { src: Gym, alt: 'Gym' },
     { src: TableTennis, alt: 'Table Tennis' },
     { src: Badminton, alt: 'Badminton' }
   ];

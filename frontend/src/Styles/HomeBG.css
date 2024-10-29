@@ -1,5 +1,5 @@
 .home-background {
-    background-color: #A7C6ED;
+    background-color:#A7C6ED; /* Light blue background color */
     padding: 20px;
     display: flex;
     flex-direction: column;
